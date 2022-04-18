@@ -1,11 +1,14 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import AppNav from './components/AppNav.vue'
+import AppFooter from "./components/AppFooter.vue";
 </script>
 
 <template>
-<AppNav logo="" list-items="[]"></AppNav>
+  <AppNav />
+  <main>
+    <router-view></router-view>
+  </main>
+  <AppFooter />
 </template>
 
 <style>
