@@ -17,7 +17,7 @@
             <div class="max-w-3xl w-full space-y-4 flex flex-col sm:items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
               <input type="text" class="grow items-center px-3.5 py-3 border border-transparent text-base leading-4 font-medium rounded-full shadow-sm text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300" placeholder="What can we do for you today?">
 
-              <button @click="$router.push('/signin')" type="button" class="inline-flex justify-center flex-none sm:ml-4 items-center px-3.5 py-3 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-blue-titleBlue bg-yellow-300 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300">
+              <button @click="$router.push('/login')" type="button" class="inline-flex justify-center flex-none sm:ml-4 items-center px-3.5 py-3 border border-transparent text-sm leading-4 font-medium rounded-full shadow-sm text-blue-titleBlue bg-yellow-300 hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300">
                 <svg class="-ml-0.5 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />

@@ -66,10 +66,10 @@ watch(open1, () => {
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-center h-16">
         <div class="flex justify-between items-center w-full">
-          <div class="flex-shrink-0 flex items-center">
+          <router-link to="/" class="flex-shrink-0 flex items-center">
             <img class="block lg:hidden h-8 w-auto" src="../assets/logo.svg" alt="Kisumu Residence Portal">
             <img class="hidden lg:block h-8 w-auto" src="../assets/logo.svg" alt="Kisumu Residence Portal">
-          </div>
+          </router-link>
           <div class="hidden md:ml-6 md:flex md:space-x-8">
             <router-link to="/" class="text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium"> Home </router-link>
             <div class="relative flex">
@@ -88,7 +88,7 @@ watch(open1, () => {
                   leave-class="transform opacity-100 translate-y-0"
                   leave-to-class="transform opacity-0 translate-y-1"
               >
-                <div ref="refDropDown" v-show="open" class="absolute -ml-4 mt-16 transform z-10 px-2 w-screen max-w-5xl sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+                <div ref="refDropDown" v-show="open" class="absolute -ml-4 mt-12 transform z-10 px-2 w-screen max-w-5xl sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                   <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                     <div class="relative flex flex-col space-y-12 bg-white px-10 py-12">
                       <div class="grid grid-cols-4 gap-4">
@@ -210,7 +210,7 @@ watch(open1, () => {
             <router-link to="/faqs" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium"> FAQs </router-link>
           </div>
           <div v-if="!mainStore.getLoggedInState" class="hidden space-x-4 md:flex md:items-center">
-            <button @click="$router.push('/signin')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-buttonBlue border-2 hover:bg-white hover:text-blue-600 hover:border-blue-buttonBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-buttonBlue">Sign In</button>
+            <button @click="$router.push('/login')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-buttonBlue border-2 hover:bg-white hover:text-blue-600 hover:border-blue-buttonBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-buttonBlue">Sign In</button>
             <button @click="$router.push('/register')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-blue-titleBlue bg-transparent border-2 border-blue-buttonBlue hover:bg-blue-buttonBlue hover:border-blue-buttonBlue hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-buttonBlue">Create Account</button>
           </div>
           <div v-if="mainStore.getLoggedInState" class="hidden md:ml-6 md:flex md:items-center">

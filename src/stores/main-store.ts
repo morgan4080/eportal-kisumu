@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { MainState, SignInFormType, OtpFormType } from '../types'
+import {MainState, SignInFormType, OtpFormType, RegisterFormType} from '../types'
 import {stat} from "fs";
 
 export const useMainStore = defineStore('main', {
@@ -32,6 +32,11 @@ export const useMainStore = defineStore('main', {
             // return boolean if server validated true | false to redirect to profile page
             return new Promise((resolve, reject) => {
                 this.isLoggedIn = true
+                resolve(true)
+            })
+        },
+        async register(payload: RegisterFormType): Promise<boolean> {
+            return new Promise((resolve, reject) => {
                 resolve(true)
             })
         },

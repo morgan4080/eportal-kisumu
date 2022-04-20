@@ -3,10 +3,21 @@ export type MainState = {
     isLoggedIn: boolean;
 }
 
+export type RegisterFormType = {
+    firstName: string;
+    lastName: string;
+    idNumber: string | null;
+    kraPin: string | null;
+    password: string;
+    confirmPassword: string;
+    phoneNumber: number | null;
+    citizenship: string | null | undefined;
+}
+
 export type SignInFormType = {
     idOrKraPin: string;
+    phoneNumber: string | null;
     password: string;
-    citizenship: string | null | undefined;
 }
 
 export type OtpFormType = {

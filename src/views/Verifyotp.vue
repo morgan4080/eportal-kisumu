@@ -73,7 +73,7 @@ const verifyOTP = async () => {
     </div>
 
     <div class="bg-white pb-80">
-      <div class="max-w-6xl mx-auto -my-80 sm:-my-72 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto -my-80 sm:-my-60 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1">
           <div class="relative">
             <div class="relative block w-full rounded-lg bg-white shadow-2xl overflow-hidden">
@@ -129,7 +129,7 @@ const verifyOTP = async () => {
                       </button>
                       <p class="font-light text-xs mt-2">Resend OTP after: {{ countdown }} sec</p>
                       <p class="flex justify-start text-sm font-medium text-gray-500 mt-4">
-                        <router-link class="text-gray-800 underline" to="/signin">Click to go back</router-link>
+                        <router-link class="text-gray-800 underline" to="/login">Click to go back</router-link>
                       </p>
                     </form>
                   </div>

@@ -30,7 +30,7 @@ const submitLogin = async () => {
   try {
     const response = await mainStore.login(signInForm.value)
     if (response) {
-      await router.push('/profile')
+      await router.push('/verify-otp')
     }
   } catch (e: any) {
     console.log(e)
@@ -53,7 +53,7 @@ const submitLogin = async () => {
     </div>
 
     <div class="bg-white pb-80">
-      <div class="max-w-6xl mx-auto -my-80 sm:-my-72 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto -my-80 sm:-my-60 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1">
           <div class="relative">
             <div class="relative block w-full rounded-lg bg-white shadow-2xl overflow-hidden">
@@ -65,7 +65,7 @@ const submitLogin = async () => {
               <div class="relative px-4 sm:px-6 lg:px-8 lg:max-w-5xl">
                 <div class="max-w-md mx-auto mt-12 sm:max-w-lg lg:mx-0 lg:pl-8 ">
                   <h1 class="text-xl text-blue-titleBlue font-medium tracking-tight">Hello, Welcome!</h1>
-                  <p class="text-gray-900 text-sm pt-2">Account Type</p>
+                  <p class="text-gray-900 text-sm pt-1">Account Type</p>
                 </div>
               </div>
               <div class="relative py-4 px-4 sm:py-6 sm:px-6 lg:px-8 lg:max-w-5xl lg:pb-8 lg:pt-4 lg:grid lg:grid-cols-2">
@@ -115,21 +115,6 @@ const submitLogin = async () => {
                           </div>
                         </div>
 
-                        <div class="col-span-full">
-                          <label for="citizen" class="block text-sm font-medium text-gray-700">Citizenship</label>
-                          <div class="mt-1 relative">
-                            <input type="text" id="citizen" name="citizen" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
-                            <div class="absolute inset-y-0 right-0 flex items-center">
-                              <hr class="rotate-90 h-0.5 bg-gray-500 w-5">
-                              <label for="currency" class="sr-only">Citizenship</label>
-                              <select v-model="signInForm.citizenship" id="currency" name="currency" class="focus:ring-amber-500 focus:border-amber-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
-                                <option>CITIZEN</option>
-                                <option>OTHER</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-
                       </div>
 
                       <button type="submit" class="w-1/3 mt-6 flex items-center bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
@@ -147,7 +132,7 @@ const submitLogin = async () => {
                     <form @submit.prevent="submitLogin" v-if="currentTab === 2" class="mt-6">
                       <div class="grid grid-cols-12 gap-y-6 gap-x-4">
                         <div class="col-span-full">
-                          <label for="id-number" class="block text-sm font-medium text-gray-700">Your National ID / KRA PIN</label>
+                          <label for="id-number" class="block text-sm font-medium text-gray-700">KRA PIN</label>
                           <div class="mt-1">
                             <input v-model="signInForm.idOrKraPin"  type="text" id="id-number" name="id-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>

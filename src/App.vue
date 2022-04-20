@@ -4,11 +4,9 @@ import AppFooter from "./components/AppFooter.vue";
 </script>
 
 <template>
-  <AppNav />
-  <main>
-    <router-view></router-view>
-  </main>
-  <AppFooter />
+  <AppNav v-if="$route.name !== 'NotFound'" />
+  <router-view></router-view>
+  <AppFooter v-if="$route.name !== 'NotFound'" />
 </template>
 
 <style>
