@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import {ref, watch} from "vue"
-import {useMainStore} from "../stores/main-store"
-import {pinia} from "../stores"
+import { ref, watch } from "vue"
+import { useMainStore } from "../stores/main-store"
+import { pinia } from "../stores"
+import { useRouter } from "vue-router"
+const router = useRouter()
 
 const mainStore = useMainStore(pinia)
 
@@ -39,6 +41,14 @@ const onClickAway = (ref: any, handler: any) => {
     document.removeEventListener("mousedown", listener);
     document.removeEventListener("touchstart", listener);
   };
+}
+
+const logOutUser = () => {
+  const response = mainStore.logOut()
+
+  if (response) {
+    router.push("/")
+  }
 }
 
 watch(open, () => {
@@ -199,13 +209,11 @@ watch(open1, () => {
             <router-link to="/contact-us" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium"> Contact </router-link>
             <router-link to="/faqs" class="text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium"> FAQs </router-link>
           </div>
-          <div v-if="!mainStore.isLoggedIn" class="hidden space-x-4 md:flex md:items-center">
+          <div v-if="!mainStore.getLoggedInState" class="hidden space-x-4 md:flex md:items-center">
             <button @click="$router.push('/signin')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-blue-buttonBlue border-2 hover:bg-white hover:text-blue-600 hover:border-blue-buttonBlue focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-buttonBlue">Sign In</button>
             <button @click="$router.push('/register')" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-blue-titleBlue bg-transparent border-2 border-blue-buttonBlue hover:bg-blue-buttonBlue hover:border-blue-buttonBlue hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-buttonBlue">Create Account</button>
           </div>
-          <div v-if="mainStore.isLoggedIn" class="hidden md:ml-6 md:flex md:items-center">
-
-            <!-- Profile dropdown -->
+          <div v-if="mainStore.getLoggedInState" class="hidden md:ml-6 md:flex md:items-center">
             <div class="ml-3 relative">
               <div @click="toggle1" @mousedown="onMouseDown1($event)" class="flex items-center cursor-pointer space-x-2">
                 <div class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
@@ -231,7 +239,7 @@ watch(open1, () => {
                 <div ref="refDropDown1" v-show="open1" class="z-50 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                   <!-- Active: "bg-gray-100", Not Active: "" -->
                   <router-link to="/profile" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</router-link>
-                  <button @click="mainStore.logOut()" type="button" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
+                  <button @click="logOutUser" type="button" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</button>
                 </div>
               </transition>
             </div>
@@ -264,7 +272,7 @@ watch(open1, () => {
         <router-link to="/contact" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Contact</router-link>
         <router-link to="/faqs" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">FAQs</router-link>
       </div>
-      <div v-if="mainStore.isLoggedIn" class="pt-4 pb-3 border-t border-gray-200">
+      <div v-if="mainStore.getLoggedInState" class="pt-4 pb-3 border-t border-gray-200">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
             <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
@@ -275,7 +283,6 @@ watch(open1, () => {
           </div>
           <button type="button" class="ml-auto flex-shrink-0 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             <span class="sr-only">View notifications</span>
-            <!-- Heroicon name: outline/bell -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>

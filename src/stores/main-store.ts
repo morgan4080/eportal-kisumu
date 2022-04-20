@@ -1,9 +1,6 @@
 import { defineStore } from 'pinia'
-
-interface MainState {
-    user: Record<string, any> | null
-    isLoggedIn: boolean
-}
+import { MainState, SignInFormType, OtpFormType } from '../types'
+import {stat} from "fs";
 
 export const useMainStore = defineStore('main', {
     state: (): MainState => ({
@@ -14,26 +11,54 @@ export const useMainStore = defineStore('main', {
         isReady(state) {
             return !!state.user
         },
+        getLoggedInState(state) {
+            return state.isLoggedIn
+        }
     },
     actions: {
-        initialize() {
+        initialize(): void {
+            // if user already exists stop initialization
             if (this.isReady) return
-            this.user = {
-                id: 1,
-                firstName: 'Jane',
-                lastName: 'Doe',
-            }
-            this.isLoggedIn = true
+            // check jwt from local storage and fetch user credentials
+            // set user state
+            // change isLoggedIn state to true
+
+            // this.isLoggedIn = true
         },
-        logOut() {
+        async sendOTP(payload: OtpFormType): Promise<boolean> {
+            // send credentials to server
+            // update isLoggedIn and add user to user state
+            // pop toast notification
+            // return boolean if server validated true | false to redirect to profile page
+            return new Promise((resolve, reject) => {
+                this.isLoggedIn = true
+                resolve(true)
+            })
+        },
+        async login(payload: SignInFormType): Promise<boolean> {
+            // send credentials to server
+            // store jwt token to localStorage
+            // pop toast notification
+            // return boolean if server validated true | false to redirect to verify OTP if user exists
+            return new Promise((resolve, reject) => {
+                this.user = {
+                    id: 1,
+                    firstName: 'Jane',
+                    lastName: 'Doe',
+                }
+                resolve(true)
+            })
+        },
+        logOut(): boolean {
             // delete token from local storage
             // clear user object
             // set isLoggedIn to false
-            // logout
-
+            // clear jwt token from localstorage
+            // pop toast notification
+            // return boolean response to trigger redirect to login page
             this.user = null
             this.isLoggedIn = false
-            window.location.reload()
+            return true
         }
     },
 })

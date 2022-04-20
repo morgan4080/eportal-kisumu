@@ -1,14 +1,23 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import {useMainStore} from "../stores/main-store"
-import {pinia} from "../stores"
+import { useMainStore } from "../stores/main-store"
+import { pinia } from "../stores"
+const mainStore = useMainStore(pinia)
+import { SignInFormType } from '../types'
 
 const router = useRouter()
+// if mainStore.getLoggedInState state is true redirect to profile always
+
+if (mainStore.getLoggedInState) {
+  router.push("/profile")
+}
 
 const currentTab = ref(<number> 1)
 
 const passwordRef = ref(<HTMLInputElement><unknown> null)
+
+const signInForm = ref(<SignInFormType> {})
 
 const revealPass = () => {
   passwordRef.value.type = 'text'
@@ -19,11 +28,12 @@ const revealPass = () => {
 
 const submitLogin = async () => {
   try {
-
+    const response = await mainStore.login(signInForm.value)
+    if (response) {
+      await router.push('/profile')
+    }
   } catch (e: any) {
     console.log(e)
-  } finally {
-    await router.push('/verify-otp')
   }
 }
 
@@ -86,14 +96,14 @@ const submitLogin = async () => {
                         <div class="col-span-full">
                           <label for="id-number" class="block text-sm font-medium text-gray-700">Your National ID / KRA PIN</label>
                           <div class="mt-1">
-                            <input type="text" id="id-number" name="id-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input v-model="signInForm.idOrKraPin" type="text" id="id-number" name="id-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
 
                         <div class="col-span-full">
                           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                           <div class="mt-1 relative">
-                            <input ref="passwordRef" type="password" id="password" name="password" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input v-model="signInForm.password"  ref="passwordRef" type="password" id="password" name="password" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                             <div class="absolute inset-y-0 right-0 flex items-center">
                               <button @click="revealPass" type="button" class="focus:ring-amber-500 focus:border-amber-500 h-full py-0 pl-2 pr-4 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +122,7 @@ const submitLogin = async () => {
                             <div class="absolute inset-y-0 right-0 flex items-center">
                               <hr class="rotate-90 h-0.5 bg-gray-500 w-5">
                               <label for="currency" class="sr-only">Citizenship</label>
-                              <select id="currency" name="currency" class="focus:ring-amber-500 focus:border-amber-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+                              <select v-model="signInForm.citizenship" id="currency" name="currency" class="focus:ring-amber-500 focus:border-amber-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
                                 <option>CITIZEN</option>
                                 <option>OTHER</option>
                               </select>
@@ -139,14 +149,14 @@ const submitLogin = async () => {
                         <div class="col-span-full">
                           <label for="id-number" class="block text-sm font-medium text-gray-700">Your National ID / KRA PIN</label>
                           <div class="mt-1">
-                            <input type="text" id="id-number" name="id-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input v-model="signInForm.idOrKraPin"  type="text" id="id-number" name="id-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
 
                         <div class="col-span-full">
                           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                           <div class="mt-1 relative">
-                            <input ref="passwordRef" type="password" id="password" name="password" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input v-model="signInForm.password" ref="passwordRef" type="password" id="password" name="password" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                             <div class="absolute inset-y-0 right-0 flex items-center">
                               <button @click="revealPass" type="button" class="focus:ring-amber-500 focus:border-amber-500 h-full py-0 pl-2 pr-4 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

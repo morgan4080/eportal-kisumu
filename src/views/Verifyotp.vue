@@ -1,11 +1,24 @@
 <script setup lang="ts">
 import { ref, watch } from "vue"
-import {useMainStore} from "../stores/main-store"
-import {pinia} from "../stores"
+import { useMainStore } from "../stores/main-store"
+import { pinia } from "../stores"
+import { OtpFormType } from "../types"
+import { useRouter } from "vue-router"
+const mainStore = useMainStore(pinia)
+
+const router = useRouter()
+
+// if mainStore.getLoggedInState state is true redirect to profile always
+
+if (mainStore.getLoggedInState) {
+  router.push("/profile")
+}
 
 const countdown = ref(<number> 115)
 
 const resendOTP = ref(<boolean> false)
+
+const otpForm = ref(<OtpFormType> {})
 
 let theInterval: any = null
 
@@ -32,10 +45,12 @@ const doResendOTP = (): void => {
   countdownInterval()
 }
 
-const verifyOTP = () => {
+const verifyOTP = async () => {
   try {
-    const mainStore = useMainStore(pinia)
-    mainStore.initialize()
+    const response = await mainStore.sendOTP(otpForm.value)
+    if (response) {
+      await router.push('/profile')
+    }
   } catch (e: any) {
     console.log(e.message)
   } finally {

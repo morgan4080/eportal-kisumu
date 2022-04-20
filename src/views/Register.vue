@@ -1,7 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, watch } from "vue"
+import { useRouter } from "vue-router"
+import { useMainStore } from "../stores/main-store"
+import { pinia } from "../stores"
+const mainStore = useMainStore(pinia)
+
+const router = useRouter()
+
+// if mainStore.getLoggedInState state is true redirect to profile always
+
+if (mainStore.getLoggedInState) {
+  router.push("/profile")
+}
 
 const currentTab = ref(<number> 1)
+
+const currentStep = ref(<number> 1)
 
 const passwordRef = ref(<HTMLInputElement><unknown> null)
 
@@ -11,6 +25,26 @@ const revealPass = () => {
     passwordRef.value.type = 'password'
   }, 2000)
 }
+
+const submitReg = (userType: string) => {
+  if (userType === 'business') {
+    // check if business step one is fully filled
+    // change current step to 2 if previous step was 1
+    console.log("incrementing business step")
+    currentStep.value += 1
+  }
+
+  if (userType === 'individual') {
+    // check if individual step one is fully filled
+    // change current step to 2 if previous step was 1
+    console.log("incrementing individual step")
+    currentStep.value += 1
+  }
+}
+
+watch(currentTab, () => {
+  currentStep.value = 1
+})
 
 </script>
 <template>
@@ -66,7 +100,7 @@ const revealPass = () => {
                       </div>
                     </div>
 
-                    <form v-if="currentTab === 1" class="mt-6">
+                    <form v-if="currentTab === 1 && currentStep === 1" @submit.prevent="submitReg('individual')" class="mt-6">
                       <div class="grid grid-cols-12 gap-y-6 gap-x-4">
 
                         <div class="col-span-full">
@@ -93,7 +127,7 @@ const revealPass = () => {
 
                       </div>
 
-                      <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                      <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                         Next
                       </button>
 
@@ -102,18 +136,68 @@ const revealPass = () => {
                       </p>
                     </form>
 
-                    <form v-if="currentTab === 2" class="mt-6">
+                    <form v-if="currentTab === 1 && currentStep === 2" @submit.prevent="submitReg('individual')" class="mt-6">
                       <div class="grid grid-cols-12 gap-y-6 gap-x-4">
                         <div class="col-span-full">
-                          <label for="id-number" class="block text-sm font-medium text-gray-700">Enter your organisation KRA PIN</label>
+                          <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your KRA PIN</label>
                           <div class="mt-1">
-                            <input type="text" id="id-number" name="id-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
 
                       </div>
 
-                      <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+                      <div class="flex justify-between">
+                        <button @click="currentStep =- 1" type="button" class="w-1/3 mt-6 bg-gray-300 border border-transparent rounded-full shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                          Previous
+                        </button>
+                        <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-full shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                          Next
+                        </button>
+                      </div>
+
+                      <p class="flex justify-start text-sm font-medium text-gray-500 mt-6">
+                        Already have an account? &nbsp;<router-link class="text-amber-400 underline" to="/signin">Log In</router-link>
+                      </p>
+                    </form>
+
+                    <form v-if="currentTab === 1 && currentStep === 3" @submit.prevent="submitReg('individual')" class="mt-6">
+                      <div class="grid grid-cols-12 gap-y-6 gap-x-4">
+                        <div class="col-span-full">
+                          <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your KRA PIN</label>
+                          <div class="mt-1">
+                            <input type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="flex justify-between">
+                        <button @click="currentStep =- 1" type="button" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                          Previous
+                        </button>
+                        <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                          Register
+                        </button>
+                      </div>
+
+                      <p class="flex justify-start text-sm font-medium text-gray-500 mt-6">
+                        Already have an account? &nbsp;<router-link class="text-amber-400 underline" to="/signin">Log In</router-link>
+                      </p>
+                    </form>
+
+                    <form v-if="currentTab === 2 && currentStep === 1" @submit.prevent="submitReg('business')" class="mt-6">
+                      <div class="grid grid-cols-12 gap-y-6 gap-x-4">
+                        <div class="col-span-full">
+                          <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your organisation KRA PIN</label>
+                          <div class="mt-1">
+                            <input type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                         Next
                       </button>
 
@@ -121,6 +205,27 @@ const revealPass = () => {
                         Already have an account? &nbsp;<router-link class="text-amber-400 underline" to="/signin">Log In</router-link>
                       </p>
                     </form>
+
+                    <form v-if="currentTab === 2 && currentStep === 2" @submit.prevent="submitReg('business')" class="mt-6">
+                      <div class="grid grid-cols-12 gap-y-6 gap-x-4">
+                        <div class="col-span-full">
+                          <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your organisation KRA PIN</label>
+                          <div class="mt-1">
+                            <input type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-md shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        Next
+                      </button>
+
+                      <p class="flex justify-start text-sm font-medium text-gray-500 mt-6">
+                        Already have an account? &nbsp;<router-link class="text-amber-400 underline" to="/signin">Log In</router-link>
+                      </p>
+                    </form>
+
                   </div>
                 </div>
               </div>
