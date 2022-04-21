@@ -13,6 +13,9 @@ export const useMainStore = defineStore('main', {
         },
         getLoggedInState(state) {
             return state.isLoggedIn
+        },
+        getLoggedInUser(state) {
+            return state.user
         }
     },
     actions: {
@@ -27,6 +30,7 @@ export const useMainStore = defineStore('main', {
         },
         async sendOTP(payload: OtpFormType): Promise<boolean> {
             // send credentials to server
+            // store jwt token to localStorage
             // update isLoggedIn and add user to user state
             // pop toast notification
             // return boolean if server validated true | false to redirect to profile page
@@ -35,12 +39,18 @@ export const useMainStore = defineStore('main', {
                 resolve(true)
             })
         },
-        async register(payload: RegisterFormType): Promise<boolean> {
+        async register(payload: RegisterFormType): Promise<{ success: boolean, userId: number }> {
             return new Promise((resolve, reject) => {
-                resolve(true)
+                this.user = {
+                    id: 1,
+                    firstName: 'Jane',
+                    lastName: 'Doe',
+                    phoneNumber: 254720753971
+                }
+                resolve({ success: true, userId: this.user.id })
             })
         },
-        async login(payload: SignInFormType): Promise<boolean> {
+        async login(payload: SignInFormType): Promise<{ success: boolean, userId: number }> {
             // send credentials to server
             // store jwt token to localStorage
             // pop toast notification
@@ -50,8 +60,9 @@ export const useMainStore = defineStore('main', {
                     id: 1,
                     firstName: 'Jane',
                     lastName: 'Doe',
+                    phoneNumber: 254720753971
                 }
-                resolve(true)
+                resolve({ success: true, userId: this.user.id })
             })
         },
         logOut(): boolean {
@@ -64,6 +75,17 @@ export const useMainStore = defineStore('main', {
             this.user = null
             this.isLoggedIn = false
             return true
+        },
+        async fetchUser(id: number | string): Promise<{ success: boolean }> {
+            return new Promise((resolve, reject) => {
+                this.user = {
+                    id: 1,
+                    firstName: 'Jane',
+                    lastName: 'Doe',
+                    phoneNumber: 254720753971
+                }
+                resolve({ success: true })
+            })
         }
     },
 })

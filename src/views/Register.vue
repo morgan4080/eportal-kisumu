@@ -35,6 +35,19 @@ const submitReg = async (userType: string) => {
   if (userType === 'business') {
     // check if business step one is fully filled
     console.log("incrementing business step")
+    if (currentStep.value === 2) {
+      if (confirm("Are you sure your detail are correct to proceed")) {
+        try {
+          const { success, userId } = await mainStore.register(registerForm.value)
+          if (success) {
+            if (userId) await router.push(`/verify-otp/${userId}`)
+          }
+        } catch (e: any) {
+          alert(e.message)
+        }
+      }
+      return
+    }
     currentStep.value += 1
   }
 
@@ -44,9 +57,9 @@ const submitReg = async (userType: string) => {
     if (currentStep.value === 4) {
       if (confirm("Are you sure your detail are correct to proceed")) {
         try {
-          const response = await mainStore.register(registerForm.value)
-          if (response) {
-
+          const { success, userId } = await mainStore.register(registerForm.value)
+          if (success) {
+            if (userId) await router.push(`/verify-otp/${userId}`)
           }
         } catch (e: any) {
           alert(e.message)
@@ -116,7 +129,10 @@ watch(currentTab, () => {
                       </div>
                     </div>
 
+                    <!--Start of individuals' forms-->
+
                     <form v-if="currentTab === 1 && currentStep === 1" @submit.prevent="submitReg('individual')" class="mt-6">
+
                       <div class="grid grid-cols-12 gap-y-6 gap-x-4">
 
                         <div class="sm:col-span-6">
@@ -167,6 +183,7 @@ watch(currentTab, () => {
                     </form>
 
                     <form v-show="currentTab === 1 && currentStep === 2" @submit.prevent="submitReg('individual')" class="mt-6">
+
                       <div class="grid grid-cols-12 gap-y-6 gap-x-4">
                         <div class="col-span-full">
                           <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
@@ -258,6 +275,11 @@ watch(currentTab, () => {
 
                     <form v-show="currentTab === 1 && currentStep === 4" @submit.prevent="submitReg('individual')" class="mt-6">
                       <div class="grid grid-cols-12 gap-y-4 gap-x-4">
+
+                        <div class="col-span-full">
+                          <div class="block text-lg font-medium text-gray-500">Continue to register account for?</div>
+                        </div>
+
                         <div v-if="registerForm.firstName" class="col-span-full">
                           <div class="block text-lg font-medium text-gray-500">Name:</div>
                           <div class="mt-2">
@@ -309,8 +331,20 @@ watch(currentTab, () => {
                       </p>
                     </form>
 
+                    <!--end of individuals' forms-->
+
+                    <!--start of businesses' forms-->
+
                     <form v-show="currentTab === 2 && currentStep === 1" @submit.prevent="submitReg('business')" class="mt-6">
+
                       <div class="grid grid-cols-12 gap-y-6 gap-x-4">
+                        <div class="col-span-full">
+                          <label for="business-name" class="block text-sm font-medium text-gray-700">Business Name</label>
+                          <div class="mt-1">
+                            <input v-model="registerForm.businessName" type="text" id="business-name" name="business-name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                          </div>
+                        </div>
+
                         <div class="col-span-full">
                           <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your organisation KRA PIN</label>
                           <div class="mt-1">
@@ -318,6 +352,12 @@ watch(currentTab, () => {
                           </div>
                         </div>
 
+                        <div class="col-span-full">
+                          <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                          <div class="mt-1">
+                            <input v-model="registerForm.phoneNumber" type="number" id="phone" name="phone" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                          </div>
+                        </div>
                       </div>
 
                       <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-full shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
@@ -330,24 +370,67 @@ watch(currentTab, () => {
                     </form>
 
                     <form v-show="currentTab === 2 && currentStep === 2" @submit.prevent="submitReg('business')" class="mt-6">
-                      <div class="grid grid-cols-12 gap-y-6 gap-x-4">
+                      <div class="grid grid-cols-12 gap-y-4 gap-x-4">
+
                         <div class="col-span-full">
-                          <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your organisation KRA PIN</label>
+                          <div class="block text-lg font-medium text-gray-500">Continue to register account for?</div>
+                        </div>
+
+                        <div class="col-span-full">
+                          <div class="block text-lg font-medium text-gray-500">Business Name:</div>
+                          <div class="mt-2">
+                            <p class="text-lg font-normal text-gray-900">Mimo Branding & Supplies Ltd</p>
+                          </div>
+                        </div>
+
+                        <div class="col-span-full">
+                          <div class="block text-lg font-medium text-gray-500">KRA Pin:</div>
+                          <div class="mt-2">
+                            <p class="text-lg font-normal text-gray-900">{{ registerForm.kraPin }}</p>
+                          </div>
+                        </div>
+
+                        <hr class="bg-gray-300 h-0.5 col-span-full">
+
+                        <div class="col-span-full">
+                          <label for="citizen" class="block text-sm font-medium text-gray-700">Citizenship</label>
+                          <div class="mt-1 relative">
+                            <input :value="registerForm.citizenship" disabled type="text" id="citizen" name="citizen" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <div class="absolute inset-y-0 right-0 flex items-center">
+                              <hr class="rotate-90 h-0.5 bg-gray-500 w-5">
+                              <label for="currency" class="sr-only">Citizenship</label>
+                              <select v-model="registerForm.citizenship" id="currency" name="currency" class="focus:ring-amber-500 focus:border-amber-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md">
+                                <option value="Kenyan">CITIZEN</option>
+                                <option value="Other">OTHER</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-span-full">
+                          <label for="idNumber" class="block text-sm font-medium text-gray-700">Enter your ID Serial Number if you are the appointed representative/agent</label>
                           <div class="mt-1">
-                            <input @input="registerForm.kraPin = registerForm.kraPin.toUpperCase()" v-model="registerForm.kraPin" type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input v-model="registerForm.idNumber" type="number" id="idNumber" name="idNumber" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
 
                       </div>
 
-                      <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-full shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                        Next
-                      </button>
+                      <div class="flex justify-between mt-4">
+                        <button @click="currentStep--" type="button" class="w-1/3 mt-6 bg-gray-300 border border-transparent rounded-full shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                          Previous
+                        </button>
+                        <button type="submit" class="w-1/3 mt-6 bg-green-600 border border-transparent rounded-full shadow-sm py-2 px-4 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                          Continue
+                        </button>
+                      </div>
 
                       <p class="flex justify-start text-sm font-medium text-gray-500 mt-6">
                         Already have an account? &nbsp;<router-link class="text-amber-400 underline" to="/login">Log In</router-link>
                       </p>
                     </form>
+
+                    <!--end of businesses' forms-->
 
                   </div>
                 </div>

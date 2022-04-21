@@ -1,5 +1,10 @@
+<script setup lang="ts">
+import { pinia } from "../stores"
+import { useMainStore } from "../stores/main-store"
+const mainStore = useMainStore(pinia)
+</script>
 <template>
-  <div>
+  <main>
     <!-- Hero card -->
     <div class="relative">
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
@@ -13,7 +18,7 @@
             <span class="block text-blue-titleBlue">Welcome to Kisumu</span>
             <span class="block text-blue-titleBlue">eResidence Portal</span>
           </h1>
-          <div class="mt-10 max-w-sm sm:max-w-none sm:flex">
+          <div v-if="!mainStore.getLoggedInState" class="mt-10 max-w-sm sm:max-w-none sm:flex">
             <div class="max-w-3xl w-full space-y-4 flex flex-col sm:items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
               <input type="text" class="grow items-center px-3.5 py-3 border border-transparent text-base leading-4 font-medium rounded-full shadow-sm text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300" placeholder="What can we do for you today?">
 
@@ -122,5 +127,5 @@
         </ul>
       </div>
     </div>
-  </div>
+  </main>
 </template>

@@ -6,17 +6,17 @@ export type MainState = {
 export type RegisterFormType = {
     firstName: string;
     lastName: string;
-    idNumber: string | null;
-    kraPin: string | null;
+    businessName: string | undefined;
+    idNumber: string | undefined;
+    kraPin: string | undefined;
     password: string;
     confirmPassword: string;
-    phoneNumber: number | null;
-    citizenship: string | null | undefined;
+    phoneNumber: number | undefined;
+    citizenship: string | undefined;
 }
 
 export type SignInFormType = {
     idOrKraPin: string;
-    phoneNumber: string | null;
     password: string;
 }
 

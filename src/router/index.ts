@@ -8,7 +8,7 @@ const routes = [
     { path:'/', name: 'Home', component: () => import("@/views/HomePage.vue"), meta: { requiresAuth: false } },
     { path:'/login', name: 'Login', component: () => import("@/views/Signin.vue"), meta: { requiresAuth: false } },
     { path:'/register', name: 'Register', component: () => import("@/views/Register.vue"), meta: { requiresAuth: false } },
-    { path:'/verify-otp', name: 'Verify-otp', component: () => import("@/views/Verifyotp.vue"), meta: { requiresAuth: false } },
+    { path:'/verify-otp/:id', name: 'Verify-otp', component: () => import("@/views/Verifyotp.vue"), meta: { requiresAuth: false } },
     { path:'/contact-us', name: 'Contact-us', component: () => import("@/views/Contact.vue"), meta: { requiresAuth: false } },
     { path:'/faqs', name: 'Faqs', component: () => import("@/views/Faqs.vue"), meta: { requiresAuth: false } },
     // only authenticated users can view profile

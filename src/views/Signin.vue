@@ -28,9 +28,9 @@ const revealPass = () => {
 
 const submitLogin = async () => {
   try {
-    const response = await mainStore.login(signInForm.value)
-    if (response) {
-      await router.push('/verify-otp')
+    const { success, userId } = await mainStore.login(signInForm.value)
+    if (success) {
+      if (userId) await router.push(`/verify-otp/${userId}`)
     }
   } catch (e: any) {
     console.log(e)

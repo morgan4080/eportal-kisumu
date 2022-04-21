@@ -3,9 +3,9 @@ import { ref, watch } from "vue"
 import { useMainStore } from "../stores/main-store"
 import { pinia } from "../stores"
 import { OtpFormType } from "../types"
-import { useRouter } from "vue-router"
+import { useRouter, useRoute } from "vue-router"
 const mainStore = useMainStore(pinia)
-
+const route = useRoute()
 const router = useRouter()
 
 // if mainStore.getLoggedInState state is true redirect to profile always
@@ -14,11 +14,38 @@ if (mainStore.getLoggedInState) {
   router.push("/profile")
 }
 
+const getUser = async () => {
+  try {
+    const id: any = route.params.id
+    const { success } = await mainStore.fetchUser(id)
+    if (success && mainStore.isReady && mainStore.getLoggedInUser) {
+      otpForm.value.phoneNumber = mainStore.getLoggedInUser.phoneNumber
+    }
+  } catch (e: any) {
+    console.log(e.message)
+  } finally {
+    clearInterval(theInterval)
+  }
+}
+
+const otpForm = ref(<OtpFormType> {})
+
+// fetch users phone number from store or from server
+
+if (mainStore.isReady && mainStore.getLoggedInUser) {
+  if (!mainStore.getLoggedInUser.phoneNumber) {
+    otpForm.value.phoneNumber = mainStore.getLoggedInUser.phoneNumber
+  } else {
+    getUser()
+  }
+} else {
+  // if no logged-in user redirect to login page
+  router.push("/login")
+}
+
 const countdown = ref(<number> 115)
 
 const resendOTP = ref(<boolean> false)
-
-const otpForm = ref(<OtpFormType> {})
 
 let theInterval: any = null
 
