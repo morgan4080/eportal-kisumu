@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import {MainState, SignInFormType, OtpFormType, RegisterFormType} from '../types'
-import {stat} from "fs";
 
 export const useMainStore = defineStore('main', {
     state: (): MainState => ({
@@ -45,6 +44,7 @@ export const useMainStore = defineStore('main', {
                     id: 1,
                     firstName: 'Jane',
                     lastName: 'Doe',
+                    email: 'jane.doe@example.com',
                     phoneNumber: 254720753971
                 }
                 resolve({ success: true, userId: this.user.id })
@@ -60,6 +60,7 @@ export const useMainStore = defineStore('main', {
                     id: 1,
                     firstName: 'Jane',
                     lastName: 'Doe',
+                    email: 'jane.doe@example.com',
                     phoneNumber: 254720753971
                 }
                 resolve({ success: true, userId: this.user.id })
@@ -82,6 +83,7 @@ export const useMainStore = defineStore('main', {
                     id: 1,
                     firstName: 'Jane',
                     lastName: 'Doe',
+                    email: 'jane.doe@example.com',
                     phoneNumber: 254720753971
                 }
                 resolve({ success: true })
