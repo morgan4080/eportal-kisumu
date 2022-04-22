@@ -1,7 +1,7 @@
 <template>
   <div class="relative mt-16 pt-8 pb-4">
     <div class="absolute inset-0">
-      <img class="h-full w-full object-cover object-bottom" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort.jpg" alt="People working on laptops">
+      <img class="h-full w-full object-cover object-bottom" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort-below.png" alt="People working on laptops">
     </div>
     <div class="relative max-w-6xl mx-auto px-4 lg:px-0">
       <div class="text-blue-titleBlue font-semibold flex flex-col lg:flex-row">

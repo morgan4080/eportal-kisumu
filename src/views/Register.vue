@@ -82,7 +82,7 @@ watch(currentTab, () => {
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-0">
-          <img class="h-full w-full object-cover object-top" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort.jpg" alt="People working on laptops">
+          <img class="h-full w-full object-cover object-top" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort top.png" alt="People working on laptops">
         </div>
         <div class="relative max-w-6xl mx-auto py-48">
 

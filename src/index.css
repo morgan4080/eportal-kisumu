@@ -13,3 +13,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.router-link-active .router-link-exact-active {
+@apply bg-blue-50 border-blue-500 text-blue-700
+}
