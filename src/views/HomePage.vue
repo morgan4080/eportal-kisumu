@@ -10,7 +10,7 @@ const mainStore = useMainStore(pinia)
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-0">
-          <img class="h-full w-full object-cover object-top" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort top.png" alt="People working on laptops">
+          <img class="h-full w-full object-cover object-top" src="../assets/KisumuBeachResort.png" alt="kisumu city view">
 <!--          <div class="absolute inset-0 bg-white mix-blend-multiply"></div>-->
         </div>
         <div class="relative max-w-6xl mx-auto px-4 py-16 sm:px-6 sm:py-24 lg:pt-32 lg:pb-48 lg:px-8">
@@ -87,7 +87,7 @@ const mainStore = useMainStore(pinia)
           <li class="relative cursor-help">
             <div class="transition ease-in-out delay-150 h-58 group block px-2 pt-6 sm:py-10 w-full rounded-lg bg-white hover:bg-amber-300 shadow-2xl focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-amber-500 overflow-hidden">
               <h3 class="text-center text-blue-titleBlue opacity-95 text-sm sm:text-base font-normal">Other Health Services</h3>
-              <img class="block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden" src="../assets/Group%202159.svg" alt="Other Health Services">
+              <img class="block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden" src="../assets/Group2159.svg" alt="Other Health Services">
               <p class="transition ease-in-out delay-150 mt-4 px-4 text-center prose prose-blue text-blue-titleBlue opacity-95 text-xs sm:text-sm hidden group-hover:block">
                 Pay your annual land rates, print statement, or register a new property.
               </p>
@@ -97,7 +97,7 @@ const mainStore = useMainStore(pinia)
           <li class="relative cursor-help">
             <div class="transition ease-in-out delay-150 h-58 group block px-2 pt-6 sm:py-10 w-full rounded-lg bg-white hover:bg-amber-300 shadow-2xl focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-amber-500 overflow-hidden">
               <h3 class="text-center text-blue-titleBlue opacity-95 text-sm sm:text-base font-normal">Advertisement Services</h3>
-              <img class="block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden" src="../assets/Group%202163.svg" alt="Advertisement Services">
+              <img class="block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden" src="../assets/Group2163.svg" alt="Advertisement Services">
               <p class="transition ease-in-out delay-150 mt-4 px-4 text-center prose prose-blue text-blue-titleBlue opacity-95 text-xs sm:text-sm hidden group-hover:block">
                 Pay your annual land rates, print statement, or register a new property.
               </p>
@@ -107,7 +107,7 @@ const mainStore = useMainStore(pinia)
           <li class="relative cursor-help">
             <div class="transition ease-in-out delay-150 h-58 group block px-2 pt-6 sm:py-10 w-full rounded-lg bg-white hover:bg-amber-300 shadow-2xl focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-amber-500 overflow-hidden">
               <h3 class="text-center text-blue-titleBlue opacity-95 text-sm sm:text-base font-normal">Property Services</h3>
-              <img class="block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden" src="../assets/Group%202161.svg" alt="Property Services">
+              <img class="block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden" src="../assets/Group2161.svg" alt="Property Services">
               <p class="transition ease-in-out delay-150 mt-4 px-4 text-center prose prose-blue text-blue-titleBlue opacity-95 text-xs sm:text-sm hidden group-hover:block">
                 Pay your annual land rates, print statement, or register a new property.
               </p>
@@ -117,7 +117,7 @@ const mainStore = useMainStore(pinia)
           <li class="relative cursor-help">
             <div class="transition ease-in-out delay-150 h-58 group block px-2 pt-6 sm:py-10 w-full rounded-lg bg-white hover:bg-amber-300 shadow-2xl focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-amber-500 overflow-hidden">
               <h3 class="text-center text-blue-titleBlue opacity-95 text-sm sm:text-base font-normal">Other Services</h3>
-              <img class="transition ease-in-out delay-150 block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden group-hover:opacity-0" src="../assets/Group%202165.svg" alt="Other Services">
+              <img class="transition ease-in-out delay-150 block h-12 sm:h-16 w-auto mx-auto my-8 group-hover:hidden group-hover:opacity-0" src="../assets/Group2165.svg" alt="Other Services">
               <p class="transition ease-in-out delay-150 mt-4 px-4 text-center prose prose-blue text-blue-titleBlue opacity-95 text-xs sm:text-sm hidden group-hover:block">
                 Pay your annual land rates, print statement, or register a new property.
               </p>

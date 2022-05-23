@@ -32,7 +32,7 @@ const setActiveNav = (index: number) => {
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-0">
-          <img class="h-full w-full object-cover object-top" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort top.png" alt="People working on laptops">
+          <img class="h-full w-full object-cover object-top" src="../assets/KisumuBeachResort.png" alt="People working on laptops">
         </div>
         <div class="relative max-w-6xl mx-auto py-48">
 
@@ -48,8 +48,12 @@ const setActiveNav = (index: number) => {
                 <div class="sm:col-span-6 flex items-center space-x-4 lg:space-x-6">
                   <img class="w-16 h-16 rounded-full lg:w-20 lg:h-20" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
                   <div class="font-medium text-lg leading-6 space-y-1">
-                    <h3>{{ mainStore.getLoggedInUser.firstName + " " + mainStore.getLoggedInUser.lastName }}</h3>
-                    <p class="text-gray-400 font-light">{{ mainStore.getLoggedInUser.email }}</p>
+                    <h3>
+                      {{ mainStore.getLoggedInUser?.firstName + " " + mainStore.getLoggedInUser?.lastName }}
+                    </h3>
+                    <p class="text-gray-400 font-light">
+                      {{ mainStore.getLoggedInUser?.email }}
+                    </p>
                   </div>
                 </div>
                 <div class="sm:col-span-6 space-y-1 flex flex-col bg-gray-200 px-8 py-4 rounded-2xl">

@@ -74,9 +74,9 @@ watch(open1, () => {
             <router-link to="/" class="text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium"> Home </router-link>
             <div class="relative flex">
                 <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
-              <button @click="toggle" @mousedown="onMouseDown($event)" type="button" :class="{'text-gray-900': open, 'text-gray-500': !(open)}" class="group hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium" :aria-expanded="open.toString()">
+              <button @click="toggle" @mousedown="onMouseDown($event)" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !open }" class="group hover:text-gray-700 inline-flex items-center px-1 pt-1 text-sm font-medium" :aria-expanded="`${open}`">
                 Services
-                <svg :class="{ 'text-gray-600': open, 'text-gray-400': !(open) }" class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <svg :class="{ 'text-gray-600': open, 'text-gray-400': !open }" class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
               </button>
@@ -278,8 +278,8 @@ watch(open1, () => {
             <img class="h-10 w-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="">
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-gray-800">{{ mainStore.getLoggedInUser.firstName + " " + mainStore.getLoggedInUser.lastName }}</div>
-            <div class="text-sm font-medium text-gray-500">{{ mainStore.getLoggedInUser.email }}</div>
+            <div class="text-base font-medium text-gray-800">{{ mainStore.getLoggedInUser?.firstName + " " + mainStore.getLoggedInUser?.lastName }}</div>
+            <div class="text-sm font-medium text-gray-500">{{ mainStore.getLoggedInUser?.email }}</div>
           </div>
         </div>
         <div class="mt-3 space-y-1">

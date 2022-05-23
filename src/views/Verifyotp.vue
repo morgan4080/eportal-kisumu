@@ -91,7 +91,7 @@ const verifyOTP = async () => {
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-0">
-          <img class="h-full w-full object-cover object-top" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort top.png" alt="People working on laptops">
+          <img class="h-full w-full object-cover object-top" src="../assets/KisumuBeachResort.png" alt="People working on laptops">
         </div>
         <div class="relative max-w-6xl mx-auto py-48">
 
@@ -106,7 +106,7 @@ const verifyOTP = async () => {
             <div class="relative block w-full rounded-lg bg-white shadow-2xl overflow-hidden">
               <div class="lg:absolute lg:inset-0">
                 <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                  <img class="h-56 w-full object-cover lg:absolute lg:h-full" src="/src/assets/Verify OTP icon.png" alt="">
+                  <img class="h-56 w-full object-cover lg:absolute lg:h-full" src="/src/assets/VerifyOTPicon.png" alt="">
                 </div>
               </div>
               <div>

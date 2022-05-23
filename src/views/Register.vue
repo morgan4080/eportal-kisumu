@@ -82,7 +82,7 @@ watch(currentTab, () => {
       <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-0">
-          <img class="h-full w-full object-cover object-top" src="../assets/Kisumu-city-view-from-Kisumu-Beach-Resort top.png" alt="People working on laptops">
+          <img class="h-full w-full object-cover object-top" src="../assets/KisumuBeachResort.png" alt="People working on laptops">
         </div>
         <div class="relative max-w-6xl mx-auto py-48">
 
@@ -195,7 +195,7 @@ watch(currentTab, () => {
                         <div class="col-span-full">
                           <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter KRA PIN</label>
                           <div class="mt-1">
-                            <input @input="registerForm.kraPin = registerForm.kraPin.toUpperCase()" v-model="registerForm.kraPin" type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input @input="registerForm.kraPin = registerForm.kraPin?.toUpperCase()" v-model="registerForm.kraPin" type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
                       </div>
@@ -219,7 +219,7 @@ watch(currentTab, () => {
                         <div class="col-span-full">
                           <label for="kra-pin" class="block text-sm font-medium text-gray-700">KRA PIN</label>
                           <div class="mt-1">
-                            <input @input="registerForm.kraPin = registerForm.kraPin.toUpperCase()" v-model="registerForm.kraPin" disabled type="text" id="kra-pin" name="kra-pin" class="block w-full border border-gray-500 bg-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input @input="registerForm.kraPin = registerForm.kraPin?.toUpperCase()" v-model="registerForm.kraPin" disabled type="text" id="kra-pin" name="kra-pin" class="block w-full border border-gray-500 bg-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
 
@@ -348,7 +348,7 @@ watch(currentTab, () => {
                         <div class="col-span-full">
                           <label for="kra-pin" class="block text-sm font-medium text-gray-700">Enter your organisation KRA PIN</label>
                           <div class="mt-1">
-                            <input @input="registerForm.kraPin = registerForm.kraPin.toUpperCase()" v-model="registerForm.kraPin" type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <input @input="registerForm.kraPin = registerForm.kraPin?.toUpperCase()" v-model="registerForm.kraPin" type="text" id="kra-pin" name="kra-pin" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
                           </div>
                         </div>
 
